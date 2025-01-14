@@ -1,1 +1,1 @@
-# rn-reanimated-playground
+# rn-playground
