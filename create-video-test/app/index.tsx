@@ -1,10 +1,13 @@
 import { CameraView, useCameraPermissions } from "expo-camera";
 import { useRef } from "react";
 import { Button, StyleSheet, Text, View } from "react-native";
+import { useRouter } from "expo-router";
 
-import { createVideo } from "./src/utils";
+import { createVideo } from "../src/utils";
 
 const App = () => {
+  const router = useRouter();
+
   const [permission, requestPermission] = useCameraPermissions();
   const cameraRef = useRef<CameraView>(null);
 
@@ -32,6 +35,10 @@ const App = () => {
       const photo = await cameraRef.current.takePictureAsync();
       console.log("사진이 촬영되었습니다:", photo?.uri);
       // 여기서 photo.uri를 사용하여 촬영된 사진을 처리할 수 있습니다
+      router.push({
+        pathname: "/detail",
+        params: { photoUri: photo?.uri },
+      });
     } catch (error) {
       console.error("사진 촬영 중 오류 발생:", error);
     }

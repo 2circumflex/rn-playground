@@ -12,6 +12,7 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
+    "scheme": "create-video-test",
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "dev.leerowoon.createvideotest"
@@ -26,14 +27,17 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "assets": ["./assets/*"],
+    "assets": [
+      "./assets/*"
+    ],
     "plugins": [
       [
         "expo-camera",
         {
           "cameraPermission": "Allow $(PRODUCT_NAME) to access your camera"
         }
-      ]
+      ],
+      "expo-router"
     ]
   }
 }
