@@ -53,6 +53,7 @@ const App = () => {
         mode={"picture"}
         active
         autofocus={"on"}
+        mirror={true}
       />
       <View style={styles.buttonContainer}>
         <Button

@@ -15,21 +15,21 @@
     "scheme": "create-video-test",
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "dev.leerowoon.createvideotest"
+      "bundleIdentifier": "dev.leerowoon.createvideotest",
+      "appleTeamId": "R92PB9MJDD"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "dev.leerowoon.createvideotest"
+      "package": "dev.leerowoon.createvideotest",
+      "permissions": ["android.permission.CAMERA"]
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "assets": [
-      "./assets/*"
-    ],
+    "assets": ["./assets/*"],
     "plugins": [
       [
         "expo-camera",
