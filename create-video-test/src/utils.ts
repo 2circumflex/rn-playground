@@ -4,9 +4,9 @@ import * as RNFS from "@dr.pogodin/react-native-fs";
 
 export const createVideo = async () => {
   try {
-    const image1Path = require("./assets/bonobono1.png");
-    const image2Path = require("./assets/bonobono2.png");
-    const watermarkPath = require("./assets/watermark.png");
+    const image1Path = require("../assets/bonobono1.png");
+    const image2Path = require("../assets/bonobono2.png");
+    const watermarkPath = require("../assets/watermark.png");
     const resolvedPath1 = Image.resolveAssetSource(image1Path).uri;
     const resolvedPath2 = Image.resolveAssetSource(image2Path).uri;
     const resolvedWatermarkPath = Image.resolveAssetSource(watermarkPath).uri;
