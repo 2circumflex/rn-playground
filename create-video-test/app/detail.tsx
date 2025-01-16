@@ -4,10 +4,10 @@ import { Image } from "expo-image";
 import {
   FlipType,
   SaveFormat,
-  ImageManipulator,
   useImageManipulator,
 } from "expo-image-manipulator";
-import { useState } from "react";
+import { useRef, useState } from "react";
+import ViewShot, { captureRef } from "react-native-view-shot";
 
 type DetailParams = {
   photoUri: string;
@@ -20,6 +20,10 @@ export default function Detail() {
 
   const [flippedImage, setFlippedImage] = useState<string | null>(null);
 
+  const [savedImage, setSavedImage] = useState<string | null>(null);
+
+  const imageRef = useRef<ViewShot>(null);
+
   const _rotate90andFlip = async () => {
     const context = imageManipulator.flip(FlipType.Horizontal);
     const image = await context.renderAsync();
@@ -29,14 +33,33 @@ export default function Detail() {
     setFlippedImage(result.uri);
   };
 
+  const _saveImage = async () => {
+    const result = await captureRef(imageRef, {
+      format: "jpg",
+      quality: 1,
+    }).then(
+      (uri) => {
+        console.log("Image saved to", uri);
+        setSavedImage(uri);
+      },
+      (error) => console.error("Oops, snapshot failed", error)
+    );
+  };
+
   return (
     <View style={styles.container}>
-      <Image source={{ uri: params.photoUri }} style={styles.image} />
+      <ViewShot ref={imageRef} style={styles.image}>
+        <Image source={{ uri: params.photoUri }} style={styles.image} />
+      </ViewShot>
       {flippedImage && (
         <Image source={{ uri: flippedImage }} style={styles.image} />
       )}
+      {savedImage && (
+        <Image source={{ uri: savedImage }} style={styles.image} />
+      )}
       <Button onPress={() => router.back()} title="뒤로가기" />
       <Button onPress={_rotate90andFlip} title="90도 회전 후 뒤집기" />
+      <Button onPress={_saveImage} title="이미지 저장" />
     </View>
   );
 }
