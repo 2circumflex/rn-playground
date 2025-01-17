@@ -1,3 +1,4 @@
+import { useRef, useState } from "react";
 import { Button, View, StyleSheet, ScrollView } from "react-native";
 import { useLocalSearchParams } from "expo-router";
 import { Image } from "expo-image";
@@ -6,7 +7,7 @@ import {
   SaveFormat,
   useImageManipulator,
 } from "expo-image-manipulator";
-import { useRef, useState } from "react";
+import * as MediaLibrary from "expo-media-library";
 import ViewShot, { captureRef } from "react-native-view-shot";
 
 type FlipImageParams = {
@@ -16,6 +17,8 @@ type FlipImageParams = {
 export default function FlipImage() {
   const params = useLocalSearchParams<FlipImageParams>();
   const imageManipulator = useImageManipulator(params.photoUri);
+
+  const [permissionResponse, requestPermission] = MediaLibrary.usePermissions();
 
   const [flippedImage, setFlippedImage] = useState<string | null>(null);
 
@@ -40,6 +43,13 @@ export default function FlipImage() {
       });
       setSavedImage(uri);
       console.log("저장된 이미지 경로 :", uri);
+
+      if (permissionResponse?.status !== "granted") {
+        await requestPermission();
+      }
+      if (permissionResponse?.status === "granted") {
+        await MediaLibrary.saveToLibraryAsync(uri);
+      }
     } catch (error) {
       console.error("이미지 저장 실패", error);
     }
