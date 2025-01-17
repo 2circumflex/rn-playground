@@ -1,4 +1,4 @@
-import { Button, View, StyleSheet } from "react-native";
+import { Button, View, StyleSheet, ScrollView } from "react-native";
 import { useLocalSearchParams } from "expo-router";
 import { Image } from "expo-image";
 import {
@@ -47,17 +47,23 @@ export default function FlipImage() {
 
   return (
     <View style={styles.container}>
-      <ViewShot ref={imageRef} style={styles.image}>
-        <Image source={{ uri: params.photoUri }} style={styles.image} />
-      </ViewShot>
-      {flippedImage && (
-        <Image source={{ uri: flippedImage }} style={styles.image} />
-      )}
-      {savedImage && (
-        <Image source={{ uri: savedImage }} style={styles.image} />
-      )}
-      <Button onPress={_rotate90andFlip} title="90도 회전 후 뒤집기" />
-      <Button onPress={_saveImage} title="이미지 저장" />
+      <ScrollView>
+        <ViewShot ref={imageRef} style={styles.image}>
+          <Image
+            source={{ uri: params.photoUri }}
+            style={styles.image}
+            contentFit="contain"
+          />
+        </ViewShot>
+        {flippedImage && (
+          <Image source={{ uri: flippedImage }} style={styles.image} />
+        )}
+        {savedImage && (
+          <Image source={{ uri: savedImage }} style={styles.image} />
+        )}
+        <Button onPress={_rotate90andFlip} title="90도 회전 후 뒤집기" />
+        <Button onPress={_saveImage} title="이미지 저장" />
+      </ScrollView>
     </View>
   );
 }
@@ -67,8 +73,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   image: {
-    flex: 1,
     width: "100%",
-    height: "100%",
+    aspectRatio: 1,
   },
 });
