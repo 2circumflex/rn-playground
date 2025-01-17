@@ -9,6 +9,7 @@ import {
 } from "expo-image-manipulator";
 import * as MediaLibrary from "expo-media-library";
 import ViewShot, { captureRef } from "react-native-view-shot";
+import Share from "react-native-share";
 
 type FlipImageParams = {
   photoUri: string;
@@ -55,6 +56,22 @@ export default function FlipImage() {
     }
   };
 
+  const _shareImage = async () => {
+    if (flippedImage) {
+      try {
+        await Share.open({
+          url: flippedImage,
+          // urls 도 있음
+          type: "image/jpeg",
+          title: "이미지 공유",
+          failOnCancel: false,
+        });
+      } catch (error) {
+        console.error("이미지 공유 실패", error);
+      }
+    }
+  };
+
   return (
     <View style={styles.container}>
       <ScrollView>
@@ -71,8 +88,9 @@ export default function FlipImage() {
         {savedImage && (
           <Image source={{ uri: savedImage }} style={styles.image} />
         )}
-        <Button onPress={_rotate90andFlip} title="90도 회전 후 뒤집기" />
+        <Button onPress={_rotate90andFlip} title="좌우 뒤집기" />
         <Button onPress={_saveImage} title="이미지 저장" />
+        <Button onPress={_shareImage} title="이미지 공유" />
       </ScrollView>
     </View>
   );
