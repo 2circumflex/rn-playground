@@ -57,7 +57,6 @@ export default function Detail() {
       {savedImage && (
         <Image source={{ uri: savedImage }} style={styles.image} />
       )}
-      <Button onPress={() => router.back()} title="뒤로가기" />
       <Button onPress={_rotate90andFlip} title="90도 회전 후 뒤집기" />
       <Button onPress={_saveImage} title="이미지 저장" />
     </View>
