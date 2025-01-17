@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import { Button, View, StyleSheet } from "react-native";
 import { AVPlaybackSource, ResizeMode, Video } from "expo-av";
+import Share from "react-native-share";
 
 import { createVideo } from "../src/utils";
 
@@ -16,6 +17,21 @@ export default function MakeVideo() {
     }
   };
 
+  const handleShareVideo = async () => {
+    if (source) {
+      try {
+        await Share.open({
+          url: source.uri,
+          type: "video/mp4",
+          title: "비디오 공유",
+          failOnCancel: false,
+        });
+      } catch (error) {
+        console.error("Error sharing video:", error);
+      }
+    }
+  };
+
   return (
     <View style={styles.container}>
       <Video
@@ -27,6 +43,7 @@ export default function MakeVideo() {
       />
       <View style={styles.buttonContainer}>
         <Button title="동영상 생성" onPress={handleCreateVideo} />
+        <Button title="공유" onPress={handleShareVideo} />
       </View>
     </View>
   );
@@ -38,7 +55,8 @@ const styles = StyleSheet.create({
     flexDirection: "column",
   },
   video: {
-    flex: 1,
+    width: "100%",
+    aspectRatio: 1,
   },
   buttonContainer: {
     flexDirection: "column",
