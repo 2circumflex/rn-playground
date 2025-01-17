@@ -2,7 +2,7 @@ import { Image } from "react-native";
 import { FFmpegKit, ReturnCode } from "ffmpeg-kit-react-native";
 import * as RNFS from "@dr.pogodin/react-native-fs";
 
-export const createVideo = async () => {
+export const createVideo = async (): Promise<string | undefined> => {
   try {
     const image1Path = require("../assets/bonobono1.png");
     const image2Path = require("../assets/bonobono2.png");
@@ -56,6 +56,7 @@ export const createVideo = async () => {
       console.log("성공! 저장된 경로:", finalOutputPath);
       // 임시 파일 삭제
       await RNFS.unlink(tempOutputPath);
+      return finalOutputPath;
     } else {
       const logs = await session2.getLogsAsString();
       console.error("실패:", logs);
