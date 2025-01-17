@@ -1,5 +1,5 @@
 import { Button, View, StyleSheet } from "react-native";
-import { useRouter, useLocalSearchParams } from "expo-router";
+import { useLocalSearchParams } from "expo-router";
 import { Image } from "expo-image";
 import {
   FlipType,
@@ -9,13 +9,12 @@ import {
 import { useRef, useState } from "react";
 import ViewShot, { captureRef } from "react-native-view-shot";
 
-type DetailParams = {
+type FlipImageParams = {
   photoUri: string;
 };
 
-export default function Detail() {
-  const router = useRouter();
-  const params = useLocalSearchParams<DetailParams>();
+export default function FlipImage() {
+  const params = useLocalSearchParams<FlipImageParams>();
   const imageManipulator = useImageManipulator(params.photoUri);
 
   const [flippedImage, setFlippedImage] = useState<string | null>(null);
@@ -34,16 +33,16 @@ export default function Detail() {
   };
 
   const _saveImage = async () => {
-    const result = await captureRef(imageRef, {
-      format: "jpg",
-      quality: 1,
-    }).then(
-      (uri) => {
-        console.log("Image saved to", uri);
-        setSavedImage(uri);
-      },
-      (error) => console.error("Oops, snapshot failed", error)
-    );
+    try {
+      const uri = await captureRef(imageRef, {
+        format: "jpg",
+        quality: 1,
+      });
+      setSavedImage(uri);
+      console.log("저장된 이미지 경로 :", uri);
+    } catch (error) {
+      console.error("이미지 저장 실패", error);
+    }
   };
 
   return (

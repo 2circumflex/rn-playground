@@ -32,7 +32,7 @@ const TakePicture = () => {
       console.log("사진이 촬영되었습니다:", photo?.uri);
       // 여기서 photo.uri를 사용하여 촬영된 사진을 처리할 수 있습니다
       router.push({
-        pathname: "/detail",
+        pathname: "/flip-image",
         params: { photoUri: photo?.uri },
       });
     } catch (error) {
