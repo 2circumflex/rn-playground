@@ -3,8 +3,6 @@ import { useRef } from "react";
 import { Button, StyleSheet, Text, View } from "react-native";
 import { useRouter } from "expo-router";
 
-import { createVideo } from "../src/utils";
-
 const App = () => {
   const router = useRouter();
 
@@ -56,15 +54,10 @@ const App = () => {
         mirror={true}
       />
       <View style={styles.buttonContainer}>
+        <Button title="사진 촬영" onPress={takePicture} />
         <Button
-          title="사진 촬영"
-          onPress={takePicture}
-          accessibilityLabel="사진 촬영 버튼"
-        />
-        <Button
-          title="보노보노 애니메이션 만들기"
-          onPress={createVideo}
-          accessibilityLabel="보노보노 애니메이션 생성 버튼"
+          title="동영상 생성으로 이동"
+          onPress={() => router.push("/make-video")}
         />
       </View>
     </View>

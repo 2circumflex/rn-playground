@@ -1,9 +1,8 @@
-import { Button, View, StyleSheet } from "react-native";
-import { useRouter, useLocalSearchParams } from "expo-router";
 import { useRef, useState } from "react";
+import { Button, View, StyleSheet } from "react-native";
+import { AVPlaybackSource, ResizeMode, Video } from "expo-av";
 
 import { createVideo } from "../src/utils";
-import { AVPlaybackSource, ResizeMode, Video } from "expo-av";
 
 export default function MakeVideo() {
   const videoRef = useRef<Video>(null);
@@ -27,11 +26,7 @@ export default function MakeVideo() {
         resizeMode={ResizeMode.CONTAIN}
       />
       <View style={styles.buttonContainer}>
-        <Button
-          title="애니메이션 만들기"
-          onPress={handleCreateVideo}
-          accessibilityLabel="애니메이션 생성 버튼"
-        />
+        <Button title="동영상 생성" onPress={handleCreateVideo} />
       </View>
     </View>
   );
