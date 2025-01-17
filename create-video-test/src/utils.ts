@@ -1,6 +1,6 @@
 import { Image } from "react-native";
 import { FFmpegKit, ReturnCode } from "ffmpeg-kit-react-native";
-import * as RNFS from "@dr.pogodin/react-native-fs";
+import * as FileSystem from "expo-file-system";
 
 export const createVideo = async (): Promise<string | undefined> => {
   try {
@@ -11,8 +11,8 @@ export const createVideo = async (): Promise<string | undefined> => {
     const resolvedPath2 = Image.resolveAssetSource(image2Path).uri;
     const resolvedWatermarkPath = Image.resolveAssetSource(watermarkPath).uri;
 
-    const tempOutputPath = `${RNFS.DocumentDirectoryPath}/temp.mp4`;
-    const finalOutputPath = `${RNFS.DocumentDirectoryPath}/output.mp4`;
+    const tempOutputPath = `${FileSystem.documentDirectory}/temp.mp4`;
+    const finalOutputPath = `${FileSystem.documentDirectory}/output.mp4`;
 
     // 1. 입력 파일과 기본 옵션 설정
     // -y: 기존 파일 덮어쓰기
@@ -55,7 +55,7 @@ export const createVideo = async (): Promise<string | undefined> => {
     if (ReturnCode.isSuccess(returnCode2)) {
       console.log("성공! 저장된 경로:", finalOutputPath);
       // 임시 파일 삭제
-      await RNFS.unlink(tempOutputPath);
+      await FileSystem.deleteAsync(tempOutputPath);
       return finalOutputPath;
     } else {
       const logs = await session2.getLogsAsString();
