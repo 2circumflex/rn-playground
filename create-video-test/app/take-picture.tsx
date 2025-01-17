@@ -50,6 +50,7 @@ const TakePicture = () => {
         active
         autofocus={"on"}
         mirror={true}
+        ratio="1:1"
       />
       <View style={styles.buttonContainer}>
         <Button title="사진 촬영" onPress={takePicture} />
@@ -69,7 +70,8 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
   },
   camera: {
-    flex: 1,
+    width: "100%",
+    aspectRatio: 1,
   },
   text: {
     fontSize: 24,
