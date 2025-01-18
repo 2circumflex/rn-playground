@@ -2,7 +2,7 @@ import { Image } from "react-native";
 import { FFmpegKit, ReturnCode } from "ffmpeg-kit-react-native";
 import * as FileSystem from "expo-file-system";
 
-export const createVideo = async (): Promise<string | undefined> => {
+export const createBonoBonoVideo = async (): Promise<string | undefined> => {
   try {
     const image1Path = require("../assets/bonobono1.png");
     const image2Path = require("../assets/bonobono2.png");

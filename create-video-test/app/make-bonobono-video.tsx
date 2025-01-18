@@ -3,14 +3,14 @@ import { Button, View, StyleSheet } from "react-native";
 import { AVPlaybackSource, ResizeMode, Video } from "expo-av";
 import Share from "react-native-share";
 
-import { createVideo } from "../src/utils";
+import { createBonoBonoVideo } from "../src/utils";
 
-export default function MakeVideo() {
+export default function MakeBonoBonoVideo() {
   const videoRef = useRef<Video>(null);
   const [source, setSource] = useState<AVPlaybackSource | undefined>(undefined);
 
   const handleCreateVideo = async () => {
-    const videoPath = await createVideo();
+    const videoPath = await createBonoBonoVideo();
     if (videoPath) {
       setSource({ uri: "file://" + videoPath });
       videoRef.current?.playAsync();
@@ -42,7 +42,7 @@ export default function MakeVideo() {
         resizeMode={ResizeMode.CONTAIN}
       />
       <View style={styles.buttonContainer}>
-        <Button title="동영상 생성" onPress={handleCreateVideo} />
+        <Button title="보노보노 동영상 생성" onPress={handleCreateVideo} />
         <Button title="공유" onPress={handleShareVideo} />
       </View>
     </View>

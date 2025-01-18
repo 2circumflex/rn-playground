@@ -11,8 +11,8 @@ const App = () => {
         onPress={() => router.push("/take-picture")}
       />
       <Button
-        title="동영상 생성으로 이동"
-        onPress={() => router.push("/make-video")}
+        title="보노보노 동영상 생성으로 이동"
+        onPress={() => router.push("/make-bonobono-video")}
       />
     </View>
   );
