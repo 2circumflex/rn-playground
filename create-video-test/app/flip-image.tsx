@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { Button, View, StyleSheet, ScrollView } from "react-native";
-import { useLocalSearchParams } from "expo-router";
+import { router, useLocalSearchParams } from "expo-router";
 import { Image } from "expo-image";
 import {
   FlipType,
@@ -91,6 +91,15 @@ export default function FlipImage() {
         <Button onPress={_rotate90andFlip} title="좌우 뒤집기" />
         <Button onPress={_saveImage} title="이미지 저장" />
         <Button onPress={_shareImage} title="이미지 공유" />
+        <Button
+          onPress={() =>
+            router.push({
+              pathname: "/make-video",
+              params: { image1Uri: params.photoUri, image2Uri: flippedImage },
+            })
+          }
+          title="이미지로 동영상 생성"
+        />
       </ScrollView>
     </View>
   );
