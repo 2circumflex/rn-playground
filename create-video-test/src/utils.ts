@@ -66,6 +66,8 @@ export const createBonoBonoVideo = async (): Promise<string | undefined> => {
   }
 };
 
+// NOTE: Android 앱에서 비디오 생성하면 Android 기기에서 재생이 되지 않음
+// createBonoBonoVideo는 재생됨
 export const createVideo = async ({
   image1Uri,
   image2Uri,
