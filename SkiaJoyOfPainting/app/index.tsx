@@ -1,5 +1,5 @@
-import { View } from "react-native";
+import { JoyOfPainting } from "@/components";
 
 export default function HomeScreen() {
-  return <View />;
+  return <JoyOfPainting />;
 }
