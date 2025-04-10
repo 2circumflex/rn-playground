@@ -22,14 +22,24 @@ export const Grain = ({ children }: GrainProps) => {
   }
   const x1 = (width - font.getTextWidth(text)) / 2;
   const x2 = (width - subFont.getTextWidth(subText)) / 2;
+
+  const textMeasure = font.measureText(text);
+  const subTextMeasure = subFont.measureText(subText);
+
   return (
     <>
       {children}
-      <Text font={font} x={x1} y={height - 150} text={text} color="white" />
+      <Text
+        font={font}
+        x={x1}
+        y={height - (textMeasure.height + 70)}
+        text={text}
+        color="white"
+      />
       <Text
         font={subFont}
         x={x2}
-        y={height - 100}
+        y={height - (subTextMeasure.height + 70)}
         text={subText}
         color="white"
       />
