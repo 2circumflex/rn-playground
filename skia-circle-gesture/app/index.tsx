@@ -1,5 +1,5 @@
-import { View } from "react-native";
+import { CircleGesture } from "@/components/circle-gesture";
 
 export default function HomeScreen() {
-  return <View />;
+  return <CircleGesture />;
 }
