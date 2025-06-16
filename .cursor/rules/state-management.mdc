@@ -1,0 +1,12 @@
+---
+description: 상태 관리 규칙
+globs: 
+---
+## 상태 관리 규칙
+
+- API로 데이터 페치 및 캐싱에는 `react-query`를 사용합니다.
+  - docs : [https://tanstack.com/query/latest/docs/framework/react/react-native](mdc:https:/tanstack.com/query/latest/docs/framework/react/react-native)
+- 복잡하고 전역으로 상태 관리가 필요하면 `zustand` 를 사용합니다.
+  - docs : [https://zustand.docs.pmnd.rs/getting-started/introduction](mdc:https:/zustand.docs.pmnd.rs/getting-started/introduction)
+- 앱이 종료되더라도 값을 저장해야 되면 key/value 저장을 위한 `react-native-mmkv` 를 사용합니다.
+  - docs : [https://github.com/mrousavy/react-native-mmkv](mdc:https:/github.com/mrousavy/react-native-mmkv)
