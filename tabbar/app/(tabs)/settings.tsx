@@ -1,15 +1,16 @@
-import React from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  ScrollView,
-  TouchableOpacity,
-  Switch,
-} from "react-native";
 import { IconSymbol } from "@/components/ui/IconSymbol";
 import { Colors } from "@/constants/Colors";
 import { useColorScheme } from "@/hooks/useColorScheme";
+import { router } from "expo-router";
+import React from "react";
+import {
+  ScrollView,
+  StyleSheet,
+  Switch,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 
 export default function SettingsScreen() {
   const colorScheme = useColorScheme();
@@ -24,11 +25,12 @@ export default function SettingsScreen() {
       title: "프로필",
       icon: "person.fill",
       type: "navigation",
+      route: "/profile",
     },
     {
       id: "notifications",
       title: "알림",
-      icon: "bell.fill",
+      icon: "paperplane.fill",
       type: "toggle",
       value: notificationsEnabled,
       onToggle: setNotificationsEnabled,
@@ -36,13 +38,14 @@ export default function SettingsScreen() {
     {
       id: "privacy",
       title: "개인정보",
-      icon: "lock.fill",
+      icon: "shield.fill",
       type: "navigation",
+      route: "/privacy",
     },
     {
       id: "darkMode",
       title: "다크 모드",
-      icon: "moon.fill",
+      icon: "house.fill",
       type: "toggle",
       value: darkModeEnabled,
       onToggle: setDarkModeEnabled,
@@ -50,20 +53,23 @@ export default function SettingsScreen() {
     {
       id: "language",
       title: "언어",
-      icon: "text.book.closed.fill",
+      icon: "paperplane.fill",
       type: "navigation",
+      route: "/language",
     },
     {
       id: "help",
       title: "도움말",
-      icon: "questionmark.circle.fill",
+      icon: "house.fill",
       type: "navigation",
+      route: "/help",
     },
     {
       id: "about",
       title: "앱 정보",
-      icon: "info.circle.fill",
+      icon: "paperplane.fill",
       type: "navigation",
+      route: "/about",
     },
   ];
 
@@ -77,6 +83,11 @@ export default function SettingsScreen() {
         key={item.id}
         style={[styles.settingItem, { backgroundColor }]}
         disabled={item.type === "toggle"}
+        onPress={() => {
+          if (item.type === "navigation" && item.route) {
+            router.push(item.route as any);
+          }
+        }}
       >
         <View style={styles.settingItemLeft}>
           <IconSymbol name={item.icon} size={24} color={iconColor} />
