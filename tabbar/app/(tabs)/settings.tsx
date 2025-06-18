@@ -11,6 +11,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export default function SettingsScreen() {
   const colorScheme = useColorScheme();
@@ -18,6 +19,8 @@ export default function SettingsScreen() {
   const [darkModeEnabled, setDarkModeEnabled] = React.useState(
     colorScheme === "dark"
   );
+
+  const { bottom } = useSafeAreaInsets();
 
   const settingsItems = [
     {
@@ -115,7 +118,10 @@ export default function SettingsScreen() {
   const textColor = Colors[colorScheme ?? "light"].text;
 
   return (
-    <ScrollView style={[styles.container, { backgroundColor }]}>
+    <ScrollView
+      style={[styles.container, { backgroundColor }]}
+      contentContainerStyle={{ paddingBottom: bottom + 90 }}
+    >
       <View style={styles.header}>
         <Text style={[styles.headerTitle, { color: textColor }]}>설정</Text>
       </View>
@@ -128,6 +134,11 @@ export default function SettingsScreen() {
       <View style={styles.settingsSection}>
         <Text style={[styles.sectionTitle, { color: textColor }]}>개인화</Text>
         {settingsItems.slice(2, 4).map(renderSettingItem)}
+      </View>
+
+      <View style={styles.settingsSection}>
+        <Text style={[styles.sectionTitle, { color: textColor }]}>지원</Text>
+        {settingsItems.slice(4).map(renderSettingItem)}
       </View>
 
       <View style={styles.settingsSection}>
