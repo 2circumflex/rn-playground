@@ -11,19 +11,37 @@ import { useColorScheme } from "@/hooks/useColorScheme";
 export default function TabLayout() {
   const colorScheme = useColorScheme();
 
+  // 다크/라이트 모드에 따른 반투명 배경색
+  const getTabBarBackgroundColor = () => {
+    return colorScheme === "dark"
+      ? "rgba(28, 28, 30, 0.85)" // 다크 모드: 어두운 반투명
+      : "rgba(255, 255, 255, 0.85)"; // 라이트 모드: 밝은 반투명
+  };
+
   return (
     <Tabs
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
         headerShown: false,
         tabBarButton: HapticTab,
-        tabBarBackground: TabBarBackground,
+        tabBarBackground: Platform.OS === "ios" ? undefined : TabBarBackground, // iOS에서는 기본 블러 효과 사용
         tabBarStyle: Platform.select({
           ios: {
-            // Use a transparent background on iOS to show the blur effect
+            // Use a semi-transparent background on iOS to show the blur effect
             position: "absolute",
+            height: 90, // 탭바 높이 조절 (기본값: ~83)
+            paddingBottom: 25,
+            paddingTop: 10,
+            backgroundColor: getTabBarBackgroundColor(), // 반투명 배경
+            // borderTopWidth: 0, // 상단 보더 제거
+            // elevation: 0, // 그림자 제거
+            // backdropFilter: "blur(20px)", // 블러 효과 (iOS Safari)
           },
-          default: {},
+          default: {
+            height: 75,
+            paddingBottom: 10,
+            paddingTop: 10,
+          },
         }),
       }}
     >
@@ -50,7 +68,7 @@ export default function TabLayout() {
         options={{
           title: "Settings",
           tabBarIcon: ({ color }) => (
-            <IconSymbol size={28} name="gearshape.fill" color={color} />
+            <IconSymbol size={28} name="house.fill" color={color} />
           ),
         }}
       />
