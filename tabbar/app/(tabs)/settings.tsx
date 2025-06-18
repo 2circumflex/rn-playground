@@ -140,11 +140,6 @@ export default function SettingsScreen() {
         <Text style={[styles.sectionTitle, { color: textColor }]}>지원</Text>
         {settingsItems.slice(4).map(renderSettingItem)}
       </View>
-
-      <View style={styles.settingsSection}>
-        <Text style={[styles.sectionTitle, { color: textColor }]}>지원</Text>
-        {settingsItems.slice(4).map(renderSettingItem)}
-      </View>
     </ScrollView>
   );
 }

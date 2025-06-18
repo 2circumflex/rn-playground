@@ -33,12 +33,9 @@ export default function TabLayout() {
             paddingBottom: 25,
             paddingTop: 10,
             backgroundColor: getTabBarBackgroundColor(), // 반투명 배경
-            // borderTopWidth: 0, // 상단 보더 제거
-            // elevation: 0, // 그림자 제거
-            // backdropFilter: "blur(20px)", // 블러 효과 (iOS Safari)
           },
           default: {
-            height: 75,
+            height: 85,
             paddingBottom: 10,
             paddingTop: 10,
           },
