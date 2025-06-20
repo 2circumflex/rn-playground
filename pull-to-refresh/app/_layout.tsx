@@ -18,6 +18,13 @@ export default function RootLayout() {
     <>
       <Stack>
         <Stack.Screen name="index" options={{ headerShown: false }} />
+        <Stack.Screen
+          name="custom-pull-to-refresh-01"
+          options={{
+            title: "Custom PullToRefresh 01",
+            headerBackTitle: "뒤로",
+          }}
+        />
         <Stack.Screen name="+not-found" />
       </Stack>
       <StatusBar style="auto" />

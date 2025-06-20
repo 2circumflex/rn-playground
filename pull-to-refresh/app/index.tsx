@@ -1,150 +1,92 @@
-import CustomPullToRefresh from "@/components/CustomPullToRefresh";
-import React, { useCallback, useState } from "react";
-import { Dimensions, FlatList, StyleSheet, Text, View } from "react-native";
+import { useRouter } from "expo-router";
+import React from "react";
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 
-interface ListItem {
+interface PullToRefreshItem {
   id: string;
   title: string;
+  subtitle: string;
   description: string;
-  category: string;
-  date: string;
-  status: "completed" | "pending" | "in-progress";
+  route: string;
+  color: string;
 }
 
-const { width } = Dimensions.get("window");
-
 export default function HomeScreen() {
-  const [refreshing, setRefreshing] = useState(false);
-  const [data, setData] = useState<ListItem[]>([
+  const router = useRouter();
+
+  const pullToRefreshTypes: PullToRefreshItem[] = [
     {
       id: "1",
-      title: "오늘의 할 일",
-      description: "프로젝트 문서 작성 및 코드 리뷰 진행",
-      category: "업무",
-      date: "2024-01-15",
-      status: "pending",
+      title: "Custom PullToRefresh 01",
+      subtitle: "스타트업 스타일",
+      description:
+        "트위터/인스타그램 스타일의 부드러운 애니메이션과 스케일 효과",
+      route: "/custom-pull-to-refresh-01",
+      color: "#007AFF",
     },
-    {
-      id: "2",
-      title: "운동하기",
-      description: "헬스장에서 1시간 운동하고 유산소 30분",
-      category: "건강",
-      date: "2024-01-15",
-      status: "completed",
-    },
-    {
-      id: "3",
-      title: "독서",
-      description: "새로 산 개발서 2장 읽기",
-      category: "학습",
-      date: "2024-01-14",
-      status: "in-progress",
-    },
-    {
-      id: "4",
-      title: "쇼핑",
-      description: "생필품 구매 및 주간 식료품 쇼핑",
-      category: "생활",
-      date: "2024-01-14",
-      status: "completed",
-    },
-    {
-      id: "5",
-      title: "친구 만나기",
-      description: "오랜만에 친구들과 카페에서 수다",
-      category: "사교",
-      date: "2024-01-13",
-      status: "completed",
-    },
-  ]);
+  ];
 
-  const onRefresh = useCallback(() => {
-    setRefreshing(true);
-
-    // 새로운 데이터 시뮬레이션
-    setTimeout(() => {
-      const newItem: ListItem = {
-        id: String(Date.now()),
-        title: "새로운 할 일",
-        description: "커스텀 새로고침으로 추가된 새로운 작업입니다",
-        category: "새 항목",
-        date: new Date().toISOString().split("T")[0],
-        status: "pending",
-      };
-
-      setData((prevData) => [newItem, ...prevData]);
-      setRefreshing(false);
-    }, 1500);
-  }, []);
-
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case "completed":
-        return "#4CAF50";
-      case "pending":
-        return "#FF9800";
-      case "in-progress":
-        return "#2196F3";
-      default:
-        return "#757575";
+  const handlePress = (route: string, isReady: boolean) => {
+    if (isReady) {
+      router.push(route as any);
     }
   };
-
-  const getStatusText = (status: string) => {
-    switch (status) {
-      case "completed":
-        return "완료";
-      case "pending":
-        return "대기";
-      case "in-progress":
-        return "진행중";
-      default:
-        return "알 수 없음";
-    }
-  };
-
-  const renderItem = ({ item }: { item: ListItem }) => (
-    <View style={styles.card}>
-      <View style={styles.cardHeader}>
-        <Text style={styles.cardTitle}>{item.title}</Text>
-        <View
-          style={[
-            styles.statusBadge,
-            { backgroundColor: getStatusColor(item.status) },
-          ]}
-        >
-          <Text style={styles.statusText}>{getStatusText(item.status)}</Text>
-        </View>
-      </View>
-
-      <Text style={styles.cardDescription}>{item.description}</Text>
-
-      <View style={styles.cardFooter}>
-        <View style={styles.categoryContainer}>
-          <Text style={styles.categoryText}>{item.category}</Text>
-        </View>
-        <Text style={styles.dateText}>{item.date}</Text>
-      </View>
-    </View>
-  );
 
   return (
     <View style={styles.container}>
-      <CustomPullToRefresh onRefresh={onRefresh} refreshing={refreshing}>
-        <View style={styles.header}>
-          <Text style={styles.headerTitle}>할 일 목록</Text>
-          <Text style={styles.headerSubtitle}>아래로 당겨서 새로고침</Text>
-        </View>
+      <View style={styles.header}>
+        <Text style={styles.headerTitle}>Pull to Refresh</Text>
+        <Text style={styles.headerSubtitle}>
+          다양한 스타일의 Pull to Refresh 구현
+        </Text>
+      </View>
 
-        <FlatList
-          data={data}
-          renderItem={renderItem}
-          keyExtractor={(item) => item.id}
-          contentContainerStyle={styles.listContainer}
-          showsVerticalScrollIndicator={false}
-          scrollEventThrottle={16}
-        />
-      </CustomPullToRefresh>
+      <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
+        {pullToRefreshTypes.map((item) => {
+          const isReady = item.id === "1"; // 첫 번째 항목만 준비됨
+
+          return (
+            <TouchableOpacity
+              key={item.id}
+              style={[
+                styles.card,
+                {
+                  opacity: isReady ? 1 : 0.6,
+                  borderLeftColor: item.color,
+                },
+              ]}
+              onPress={() => handlePress(item.route, isReady)}
+              disabled={!isReady}
+            >
+              <View style={styles.cardContent}>
+                <View style={styles.cardHeader}>
+                  <Text style={styles.cardTitle}>{item.title}</Text>
+                  {!isReady && (
+                    <View style={styles.comingSoonBadge}>
+                      <Text style={styles.comingSoonText}>준비 중</Text>
+                    </View>
+                  )}
+                </View>
+
+                <Text style={styles.cardSubtitle}>{item.subtitle}</Text>
+                <Text style={styles.cardDescription}>{item.description}</Text>
+
+                {isReady && (
+                  <View style={styles.readyIndicator}>
+                    <Text style={styles.readyText}>체험하기 →</Text>
+                  </View>
+                )}
+              </View>
+            </TouchableOpacity>
+          );
+        })}
+      </ScrollView>
     </View>
   );
 }
@@ -152,44 +94,46 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#ffffff",
+    backgroundColor: "#f8f9fa",
   },
   header: {
     paddingHorizontal: 20,
     paddingTop: 60,
-    paddingBottom: 20,
+    paddingBottom: 30,
+    backgroundColor: "#ffffff",
   },
   headerTitle: {
-    marginTop: 20,
-    fontSize: 22,
+    fontSize: 28,
     fontWeight: "bold",
-    marginBottom: 4,
     color: "#000000",
+    marginBottom: 8,
   },
   headerSubtitle: {
     fontSize: 16,
-    opacity: 0.7,
-    color: "#000000",
+    color: "#666666",
+    lineHeight: 22,
   },
-  listContainer: {
+  content: {
+    flex: 1,
     paddingHorizontal: 20,
-    paddingBottom: 20,
+    paddingTop: 20,
   },
   card: {
     backgroundColor: "#ffffff",
-    borderRadius: 12,
-    padding: 16,
-    marginBottom: 12,
-    borderWidth: 1,
-    borderColor: "#e0e0e0",
+    borderRadius: 16,
+    marginBottom: 16,
+    borderLeftWidth: 4,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
       height: 2,
     },
     shadowOpacity: 0.1,
-    shadowRadius: 3.84,
-    elevation: 5,
+    shadowRadius: 8,
+    elevation: 4,
+  },
+  cardContent: {
+    padding: 20,
   },
   cardHeader: {
     flexDirection: "row",
@@ -198,48 +142,40 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   cardTitle: {
-    fontSize: 18,
-    fontWeight: "600",
-    flex: 1,
-    marginRight: 12,
+    fontSize: 20,
+    fontWeight: "700",
     color: "#000000",
+    flex: 1,
   },
-  statusBadge: {
+  comingSoonBadge: {
+    backgroundColor: "#FF9500",
     paddingHorizontal: 8,
     paddingVertical: 4,
     borderRadius: 12,
   },
-  statusText: {
+  comingSoonText: {
     color: "#FFFFFF",
     fontSize: 12,
-    fontWeight: "500",
+    fontWeight: "600",
+  },
+  cardSubtitle: {
+    fontSize: 16,
+    color: "#007AFF",
+    fontWeight: "600",
+    marginBottom: 8,
   },
   cardDescription: {
     fontSize: 14,
+    color: "#666666",
     lineHeight: 20,
-    marginBottom: 12,
-    opacity: 0.8,
-    color: "#000000",
+    marginBottom: 16,
   },
-  cardFooter: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+  readyIndicator: {
+    alignSelf: "flex-end",
   },
-  categoryContainer: {
-    backgroundColor: "rgba(0, 122, 255, 0.1)",
-    paddingHorizontal: 8,
-    paddingVertical: 4,
-    borderRadius: 8,
-  },
-  categoryText: {
-    fontSize: 12,
+  readyText: {
+    fontSize: 14,
     color: "#007AFF",
-    fontWeight: "500",
-  },
-  dateText: {
-    fontSize: 12,
-    opacity: 0.6,
-    color: "#000000",
+    fontWeight: "600",
   },
 });
