@@ -1,10 +1,10 @@
 import React from "react";
 import { ScrollView, StyleSheet } from "react-native";
 
-import { Button } from "@/components/Button";
-import { ThemedText } from "@/components/ThemedText";
-import { ThemedView } from "@/components/ThemedView";
-import { useTheme } from "@/hooks/useDesignSystem";
+import { Button } from "../components/Button";
+import { ThemedText } from "../components/ThemedText";
+import { ThemedView } from "../components/ThemedView";
+import { useTheme } from "../hooks/useDesignSystem";
 
 export default function Index() {
   const theme = useTheme();
@@ -23,12 +23,102 @@ export default function Index() {
         {/* 색상 샘플 */}
         <ThemedView background="surface" style={styles.section}>
           <ThemedText size="lg">컬러</ThemedText>
-          <ThemedView
-            style={[styles.colorBox, { backgroundColor: theme.colors.primary }]}
-          />
-          <ThemedText size="sm" color="secondary">
-            Primary: {theme.colors.primary}
-          </ThemedText>
+
+          <ThemedView style={styles.colorGrid}>
+            <ThemedView style={styles.colorItem}>
+              <ThemedView
+                style={[
+                  styles.colorBox,
+                  { backgroundColor: theme.colors.primary },
+                ]}
+              />
+              <ThemedText size="sm" color="secondary">
+                Primary
+              </ThemedText>
+              <ThemedText size="sm" color="secondary">
+                {theme.colors.primary}
+              </ThemedText>
+            </ThemedView>
+
+            <ThemedView style={styles.colorItem}>
+              <ThemedView
+                style={[
+                  styles.colorBox,
+                  {
+                    backgroundColor: theme.colors.background,
+                    borderWidth: 1,
+                    borderColor: theme.colors.border,
+                  },
+                ]}
+              />
+              <ThemedText size="sm" color="secondary">
+                Background
+              </ThemedText>
+              <ThemedText size="sm" color="secondary">
+                {theme.colors.background}
+              </ThemedText>
+            </ThemedView>
+
+            <ThemedView style={styles.colorItem}>
+              <ThemedView
+                style={[
+                  styles.colorBox,
+                  { backgroundColor: theme.colors.surface },
+                ]}
+              />
+              <ThemedText size="sm" color="secondary">
+                Surface
+              </ThemedText>
+              <ThemedText size="sm" color="secondary">
+                {theme.colors.surface}
+              </ThemedText>
+            </ThemedView>
+
+            <ThemedView style={styles.colorItem}>
+              <ThemedView
+                style={[
+                  styles.colorBox,
+                  { backgroundColor: theme.colors.text },
+                ]}
+              />
+              <ThemedText size="sm" color="secondary">
+                Text
+              </ThemedText>
+              <ThemedText size="sm" color="secondary">
+                {theme.colors.text}
+              </ThemedText>
+            </ThemedView>
+
+            <ThemedView style={styles.colorItem}>
+              <ThemedView
+                style={[
+                  styles.colorBox,
+                  { backgroundColor: theme.colors.textSecondary },
+                ]}
+              />
+              <ThemedText size="sm" color="secondary">
+                Text Secondary
+              </ThemedText>
+              <ThemedText size="sm" color="secondary">
+                {theme.colors.textSecondary}
+              </ThemedText>
+            </ThemedView>
+
+            <ThemedView style={styles.colorItem}>
+              <ThemedView
+                style={[
+                  styles.colorBox,
+                  { backgroundColor: theme.colors.border },
+                ]}
+              />
+              <ThemedText size="sm" color="secondary">
+                Border
+              </ThemedText>
+              <ThemedText size="sm" color="secondary">
+                {theme.colors.border}
+              </ThemedText>
+            </ThemedView>
+          </ThemedView>
         </ThemedView>
 
         {/* 텍스트 샘플 */}
@@ -90,8 +180,21 @@ const styles = StyleSheet.create({
     gap: 12,
   },
   colorBox: {
+    width: 40,
     height: 40,
     borderRadius: 8,
+  },
+  colorGrid: {
+    paddingVertical: 12,
+    flexDirection: "row",
+    flexWrap: "wrap",
+    gap: 12,
+  },
+  colorItem: {
+    flex: 1,
+    minWidth: 120,
+    alignItems: "center",
+    gap: 4,
   },
   footer: {
     textAlign: "center",
