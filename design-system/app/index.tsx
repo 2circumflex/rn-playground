@@ -44,17 +44,18 @@ export default function Index() {
         {/* 버튼 샘플 */}
         <ThemedView background="surface" style={styles.section}>
           <ThemedText size="lg">버튼</ThemedText>
+          <Button variant="primary" onPress={() => alert("Primary 버튼 클릭!")}>
+            Primary 버튼
+          </Button>
           <Button
-            title="Primary 버튼"
-            variant="primary"
-            onPress={() => alert("Primary 버튼 클릭!")}
-          />
-          <Button
-            title="Secondary 버튼"
             variant="secondary"
             onPress={() => alert("Secondary 버튼 클릭!")}
-          />
-          <Button title="로딩 버튼" variant="primary" loading={true} />
+          >
+            Secondary 버튼
+          </Button>
+          <Button variant="primary" loading={true}>
+            로딩 버튼
+          </Button>
         </ThemedView>
 
         <ThemedText size="sm" color="secondary" style={styles.footer}>

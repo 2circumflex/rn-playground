@@ -8,13 +8,13 @@ import { useTheme } from "../hooks/useDesignSystem";
 import { ThemedText } from "./ThemedText";
 
 interface ButtonProps extends TouchableOpacityProps {
-  title: string;
   variant?: "primary" | "secondary";
   loading?: boolean;
+  children: React.ReactNode;
 }
 
 export function Button({
-  title,
+  children,
   variant = "primary",
   loading = false,
   style,
@@ -48,7 +48,7 @@ export function Button({
           color={variant === "primary" ? "#FFFFFF" : theme.colors.primary}
         />
       ) : (
-        <ThemedText color={textColor as any}>{title}</ThemedText>
+        <ThemedText color={textColor as any}>{children}</ThemedText>
       )}
     </TouchableOpacity>
   );
