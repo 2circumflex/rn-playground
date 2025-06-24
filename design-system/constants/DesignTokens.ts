@@ -8,6 +8,11 @@ export const Colors = {
     text: "#000000",
     textSecondary: "#8E8E93",
     border: "#C6C6C8",
+    // 의미적 색상들
+    success: "#22C55E", // 녹색
+    error: "#EF4444", // 빨간색
+    warning: "#F59E0B", // 주황색
+    accent: "#007AFF", // primary와 동일
   },
   // 다크 모드 색상
   dark: {
@@ -17,6 +22,11 @@ export const Colors = {
     text: "#FFFFFF",
     textSecondary: "#8E8E93",
     border: "#38383A",
+    // 의미적 색상들
+    success: "#22C55E", // 녹색
+    error: "#EF4444", // 빨간색
+    warning: "#F59E0B", // 주황색
+    accent: "#0A84FF", // primary와 동일
   },
 };
 

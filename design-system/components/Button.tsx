@@ -64,7 +64,7 @@ export function Button({
       case "destructive":
         return {
           ...baseStyle,
-          backgroundColor: "#EF4444", // 빨간색
+          backgroundColor: theme.colors.error,
           borderWidth: 0,
         };
       default:

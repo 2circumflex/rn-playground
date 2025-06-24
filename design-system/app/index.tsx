@@ -118,17 +118,81 @@ export default function Index() {
                 {theme.colors.border}
               </ThemedText>
             </ThemedView>
+
+            <ThemedView style={styles.colorItem}>
+              <ThemedView
+                style={[
+                  styles.colorBox,
+                  { backgroundColor: theme.colors.success },
+                ]}
+              />
+              <ThemedText size="sm" color="secondary">
+                Success
+              </ThemedText>
+              <ThemedText size="sm" color="secondary">
+                {theme.colors.success}
+              </ThemedText>
+            </ThemedView>
+
+            <ThemedView style={styles.colorItem}>
+              <ThemedView
+                style={[
+                  styles.colorBox,
+                  { backgroundColor: theme.colors.error },
+                ]}
+              />
+              <ThemedText size="sm" color="secondary">
+                Error
+              </ThemedText>
+              <ThemedText size="sm" color="secondary">
+                {theme.colors.error}
+              </ThemedText>
+            </ThemedView>
+
+            <ThemedView style={styles.colorItem}>
+              <ThemedView
+                style={[
+                  styles.colorBox,
+                  { backgroundColor: theme.colors.warning },
+                ]}
+              />
+              <ThemedText size="sm" color="secondary">
+                Warning
+              </ThemedText>
+              <ThemedText size="sm" color="secondary">
+                {theme.colors.warning}
+              </ThemedText>
+            </ThemedView>
           </ThemedView>
         </ThemedView>
 
         {/* 텍스트 샘플 */}
         <ThemedView background="surface" style={styles.section}>
           <ThemedText size="lg">텍스트</ThemedText>
-          <ThemedText size="xl">Extra Large</ThemedText>
-          <ThemedText size="lg">Large</ThemedText>
-          <ThemedText size="md">Medium (기본)</ThemedText>
-          <ThemedText size="sm">Small</ThemedText>
-          <ThemedText color="secondary">Secondary Color</ThemedText>
+
+          {/* 크기별 샘플 */}
+          <ThemedView style={styles.textGroup}>
+            <ThemedText size="sm" color="secondary">
+              크기별
+            </ThemedText>
+            <ThemedText size="xl">Extra Large</ThemedText>
+            <ThemedText size="lg">Large</ThemedText>
+            <ThemedText size="md">Medium (기본)</ThemedText>
+            <ThemedText size="sm">Small</ThemedText>
+          </ThemedView>
+
+          {/* 색상별 샘플 */}
+          <ThemedView style={styles.textGroup}>
+            <ThemedText size="sm" color="secondary">
+              색상별
+            </ThemedText>
+            <ThemedText color="primary">Primary Text</ThemedText>
+            <ThemedText color="secondary">Secondary Text</ThemedText>
+            <ThemedText color="success">Success Text</ThemedText>
+            <ThemedText color="error">Error Text</ThemedText>
+            <ThemedText color="warning">Warning Text</ThemedText>
+            <ThemedText color="accent">Accent Text</ThemedText>
+          </ThemedView>
         </ThemedView>
 
         {/* 버튼 샘플 */}
@@ -196,6 +260,9 @@ const styles = StyleSheet.create({
     padding: 16,
     borderRadius: 12,
     gap: 12,
+  },
+  textGroup: {
+    gap: 8,
   },
   colorBox: {
     width: 40,

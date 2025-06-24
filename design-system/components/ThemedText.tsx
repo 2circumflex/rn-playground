@@ -4,7 +4,7 @@ import { useTheme } from "../hooks/useDesignSystem";
 
 interface ThemedTextProps extends TextProps {
   size?: "sm" | "md" | "lg" | "xl";
-  color?: "primary" | "secondary";
+  color?: "primary" | "secondary" | "success" | "error" | "warning" | "accent";
 }
 
 export function ThemedText({
@@ -15,8 +15,26 @@ export function ThemedText({
 }: ThemedTextProps) {
   const theme = useTheme();
 
-  const textColor =
-    color === "primary" ? theme.colors.text : theme.colors.textSecondary;
+  const getTextColor = () => {
+    switch (color) {
+      case "primary":
+        return theme.colors.text;
+      case "secondary":
+        return theme.colors.textSecondary;
+      case "success":
+        return theme.colors.success;
+      case "error":
+        return theme.colors.error;
+      case "warning":
+        return theme.colors.warning;
+      case "accent":
+        return theme.colors.accent;
+      default:
+        return theme.colors.text;
+    }
+  };
+
+  const textColor = getTextColor();
 
   return (
     <Text
