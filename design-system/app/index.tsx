@@ -134,15 +134,33 @@ export default function Index() {
         {/* 버튼 샘플 */}
         <ThemedView background="surface" style={styles.section}>
           <ThemedText size="lg">버튼</ThemedText>
+
           <Button variant="primary" onPress={() => alert("Primary 버튼 클릭!")}>
             Primary 버튼
           </Button>
+
           <Button
             variant="secondary"
             onPress={() => alert("Secondary 버튼 클릭!")}
           >
             Secondary 버튼
           </Button>
+
+          <Button variant="outline" onPress={() => alert("Outline 버튼 클릭!")}>
+            Outline 버튼
+          </Button>
+
+          <Button variant="ghost" onPress={() => alert("Ghost 버튼 클릭!")}>
+            Ghost 버튼
+          </Button>
+
+          <Button
+            variant="destructive"
+            onPress={() => alert("Destructive 버튼 클릭!")}
+          >
+            Destructive 버튼
+          </Button>
+
           <Button variant="primary" loading={true}>
             로딩 버튼
           </Button>
