@@ -100,6 +100,9 @@ export function Button({
     <TouchableOpacity
       style={[buttonStyle, style]}
       disabled={isDisabled}
+      accessibilityRole="button"
+      accessibilityState={{ disabled: isDisabled }}
+      onPress={loading ? undefined : props.onPress}
       {...props}
     >
       {loading ? (
