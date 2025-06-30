@@ -4,6 +4,7 @@ import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
+import { KeyboardProvider } from "react-native-keyboard-controller";
 import "react-native-reanimated";
 
 export {
@@ -41,9 +42,15 @@ export default function RootLayout() {
 function RootLayoutNav() {
   return (
     <ThemeProvider value={DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="index" options={{ headerShown: false }} />
-      </Stack>
+      <KeyboardProvider>
+        <Stack>
+          <Stack.Screen name="index" options={{ headerShown: false }} />
+          <Stack.Screen name="basic" />
+          <Stack.Screen name="advanced" />
+          <Stack.Screen name="advanced-toolbar" />
+          <Stack.Screen name="view-avoiding" />
+        </Stack>
+      </KeyboardProvider>
     </ThemeProvider>
   );
 }
