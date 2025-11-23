@@ -1,0 +1,25 @@
+{
+  "name": "react-native-ai-test01",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo run:android",
+    "ios": "expo run:ios",
+    "web": "expo start --web"
+  },
+  "dependencies": {
+    "@react-native-ai/mlc": "^0.11.0",
+    "ai": "^5.0.100",
+    "expo": "~53.0.0",
+    "expo-build-properties": "~0.14.8",
+    "expo-status-bar": "~2.2.3",
+    "react": "19.0.0",
+    "react-native": "0.79.6",
+    "react-native-ai": "^1.0.3",
+    "react-native-reanimated": "~3.17.4",
+    "tailwindcss": "^4.1.17",
+    "uniwind": "^1.0.4"
+  },
+  "private": true
+}
