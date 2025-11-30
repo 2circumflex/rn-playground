@@ -1,0 +1,12 @@
+ensure_xcode_version(version: "16.2")
+default_platform(:ios)
+
+platform :ios do
+
+after_all do |lane|
+  notification(subtitle:"Success", message:"Fastlane finished '#{lane}' successfully")
+end
+
+error do |lane, exception|
+  notification(subtitle:"Failed", message:"Fastlane '#{lane}' errored")
+end

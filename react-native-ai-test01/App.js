@@ -6,7 +6,7 @@ import { streamText } from 'ai';
 
 // Using a smaller model for faster download/inference testing if possible, 
 // but sticking to the requested Llama 3.2 3B which is standard for on-device.
-const MODEL_ID = 'Llama-3.2-3B-Instruct-q4f16_1-MLC';
+const MODEL_ID = 'Llama-3.2-1B-Instruct';
 
 export default function App() {
   const [messages, setMessages] = useState([]);
@@ -17,7 +17,7 @@ export default function App() {
   const flatListRef = useRef(null);
 
   useEffect(() => {
-    const sub = MLCEngine.onDownloadProgress.addListener((progress) => {
+    const sub = MLCEngine.onDownloadProgress((progress) => {
       setDownloadProgress(progress.percentage);
     });
     return () => sub.remove();

@@ -1,0 +1,4 @@
+app_identifier("dev.leerowoon.reactnativeaitest01")
+
+itc_team_id("118275460") # App Store Connect Team ID
+team_id("R92PB9MJDD") # Developer Portal Team ID

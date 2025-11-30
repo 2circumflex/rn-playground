@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "react-native-ai-test01",
-    "slug": "react-native-ai-test01",
+    "name": "reactnativeaitest01",
+    "slug": "reactnativeaitest01",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -14,7 +14,8 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.anonymous.react-native-ai-test01"
+      "bundleIdentifier": "dev.leerowoon.reactnativeaitest01",
+      "appleTeamId": "R92PB9MJDD"
     },
     "android": {
       "adaptiveIcon": {
@@ -22,7 +23,7 @@
         "backgroundColor": "#ffffff"
       },
       "edgeToEdgeEnabled": true,
-      "package": "com.anonymous.reactnativeaitest01"
+      "package": "dev.leerowoon.reactnativeaitest01"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -36,7 +37,15 @@
           }
         }
       ],
-      "@react-native-ai/mlc"
+      "@react-native-ai/mlc",
+      [
+        "./plugins/withIOSDevSign",
+        {
+          "appleTeamId": "R92PB9MJDD",
+          "provisioningProfileSpecifier": "match Development dev.leerowoon.reactnativeaitest01",
+          "codeSignIdentity": "iPhone Developer"
+        }
+      ]
     ]
   }
 }
